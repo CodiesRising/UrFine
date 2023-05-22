@@ -1,4 +1,4 @@
-<?php
+/*<?php
 
 $conn = mysqli_connect('localhost','root','','contact_db') or die('connection failed');
 
@@ -561,4 +561,4 @@ if(isset($_POST['submit'])){
 <script src="js/script.js"></script>
 
 </body>
-</html>
+</html>*/
