@@ -1,24 +1,4 @@
-/*<?php
 
-$conn = mysqli_connect('localhost','root','','contact_db') or die('connection failed');
-
-if(isset($_POST['submit'])){
-
-   $name = mysqli_real_escape_string($conn, $_POST['name']);
-   $email = mysqli_real_escape_string($conn, $_POST['email']);
-   $number = $_POST['number'];
-   $date = $_POST['date'];
-
-   $insert = mysqli_query($conn, "INSERT INTO `contact_form`(name, email, number, date) VALUES('$name','$email','$number','$date')") or die('query failed');
-
-   if($insert){
-      $message[] = 'appointment made successfully!';
-   }else{
-      $message[] = 'appointment failed';
-   }
-
-}
-?>
 
 
 <!DOCTYPE html>
@@ -27,7 +7,7 @@ if(isset($_POST['submit'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>complete responsive hospital website create by win coder</title>
+    <title>UrFine</title>
 
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -50,8 +30,8 @@ if(isset($_POST['submit'])){
         <a href="#services">services</a>
         <a href="#doctors">doctors</a>
         <a href="#appointment">appointment</a>
-        <a href="#review">review</a>
-        <a href="#blogs">blogs</a>
+        
+        
     </nav>
 
     <div id="menu-btn" class="fas fa-bars"></div>
@@ -64,14 +44,14 @@ if(isset($_POST['submit'])){
 
 <section class="home" id="home">
 
-    <div class="image">
-        <img src="image/home-img.svg" alt="">
+   <div class="image">
+        <img src=" dog.jpj.jpg" alt="">
     </div>
 
     <div class="content">
         <h3>we take care of your healthy life</h3>
         <p> A person who has good physical health is likely to have bodily functions and processes working at their peak.</p>
-        <a href="#appointment" class="btn"> appointment us <span class="fas fa-chevron-right"></span> </a>
+        <a href="#appointment" class="btn"> Book appointment with us <span class="fas fa-chevron-right"></span> </a>
     </div>
 
 </section>
@@ -84,25 +64,25 @@ if(isset($_POST['submit'])){
 
     <div class="icons">
         <i class="fas fa-user-md"></i>
-        <h3>150+</h3>
+        <h3>100+</h3>
         <p>doctors at work</p>
     </div>
 
     <div class="icons">
         <i class="fas fa-users"></i>
-        <h3>1030+</h3>
+        <h3>100+</h3>
         <p>satisfied patients</p>
     </div>
 
     <div class="icons">
         <i class="fas fa-procedures"></i>
-        <h3>490+</h3>
+        <h3>300+</h3>
         <p>bed facility</p>
     </div>
 
     <div class="icons">
         <i class="fas fa-hospital"></i>
-        <h3>70+</h3>
+        <h3>50+</h3>
         <p>available hospitals</p>
     </div>
 
@@ -119,13 +99,14 @@ if(isset($_POST['submit'])){
     <div class="row">
 
         <div class="image">
-            <img src="image/about-img.svg" alt="">
+            <img src=" dog.jpj.jpg" alt="">
         </div>
 
         <div class="content">
             <h3>take the world's best quality treatment</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure ducimus, quod ex cupiditate ullam in assumenda maiores et culpa odit tempora ipsam qui, quisquam quis facere iste fuga, minus nesciunt.</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus vero ipsam laborum porro voluptates voluptatibus a nihil temporibus deserunt vel?</p>
+            <p>To provide Hope, Care and Cure. To provide compassionate, accessible, high quality, cost effective healthcare to one all.</p> 
+            <p>To serve with a patient's first motto and to work towards a patient- centered care.</p>
+            
             <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
@@ -146,42 +127,43 @@ if(isset($_POST['submit'])){
         <div class="box">
             <i class="fas fa-notes-medical"></i>
             <h3>free checkups</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
+            <p>Your health is our concern.</p>
             <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
         <div class="box">
             <i class="fas fa-ambulance"></i>
             <h3>24/7 ambulance</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
+            <p>Experienced fast and dependable ambulance services during your critical moments .</p>
+            <p>Our experienced team is ready to transport you.</p>
             <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
         <div class="box">
             <i class="fas fa-user-md"></i>
             <h3>expert doctors</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
+            <p>Specialist doctors,Qualified & experienced.</p>
             <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
         <div class="box">
             <i class="fas fa-pills"></i>
             <h3>medicines</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
+            <p>Knowlegeable and Experienced pharmacist</p>
             <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
         <div class="box">
             <i class="fas fa-procedures"></i>
             <h3>bed facility</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
+            <p>Electric ,semi-electric ,collapsible,gatch bed available.</p>
             <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
         <div class="box">
             <i class="fas fa-heartbeat"></i>
             <h3>total care</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
+            <p>Help you take the right choice for improved health and care.</p>
             <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
@@ -202,8 +184,8 @@ if(isset($_POST['submit'])){
     <div class="box-container">
 
         <div class="box">
-            <img src="image/doc-1.jpg" alt="">
-            <h3>win coder</h3>
+            <img src=" dog.jpj.jpg" alt="">
+            <h3>Vanessa Thompson</h3>
             <span>expert doctor</span>
             <div class="share">
             <a href="#" class="fab fa-facebook-f"></a>
@@ -215,8 +197,8 @@ if(isset($_POST['submit'])){
         </div>
 
         <div class="box">
-            <img src="image/doc-2.jpg" alt="">
-            <h3>win coder</h3>
+            <img src=" dog.jpj.jpg" alt="">
+            <h3>Jason Chen</h3>
             <span>expert doctor</span>
             <div class="share">
             <a href="#" class="fab fa-facebook-f"></a>
@@ -227,8 +209,8 @@ if(isset($_POST['submit'])){
         </div>
 
         <div class="box">
-            <img src="image/doc-3.jpg" alt="">
-            <h3>win coder</h3>
+            <img src=" dog.jpj.jpg" alt="">
+            <h3>George Philip</h3>
             <span>expert doctor</span>
             <div class="share">
             <a href="#" class="fab fa-facebook-f"></a>
@@ -239,8 +221,8 @@ if(isset($_POST['submit'])){
         </div>
 
         <div class="box">
-            <img src="image/doc-4.jpg" alt="">
-            <h3>win coder</h3>
+            <img src=" dog.jpj.jpg" alt="">
+            <h3>Rachel Watson</h3>
             <span>expert doctor</span>
             <div class="share">
             <a href="#" class="fab fa-facebook-f"></a>
@@ -251,8 +233,8 @@ if(isset($_POST['submit'])){
         </div>
 
         <div class="box">
-            <img src="image/doc-5.jpg" alt="">
-            <h3>win coder</h3>
+            <img src=" dog.jpj.jpg" alt="">
+            <h3>Mathew Johnson</h3>
             <span>expert doctor</span>
             <div class="share">
             <a href="#" class="fab fa-facebook-f"></a>
@@ -263,8 +245,8 @@ if(isset($_POST['submit'])){
         </div>
 
         <div class="box">
-            <img src="image/doc-6.jpg" alt="">
-            <h3>win coder</h3>
+            <img src=" dog.jpj.jpg" alt="">
+            <h3>Reese Thomas</h3>
             <span>expert doctor</span>
             <div class="share">
             <a href="#" class="fab fa-facebook-f"></a>
@@ -275,8 +257,8 @@ if(isset($_POST['submit'])){
             </div>
         </div>
         <div class="box">
-            <img src="image/doc-7.jpg" alt="">
-            <h3>win coder</h3>
+            <img src=" dog.jpj.jpg" alt="">
+            <h3>Sebastain Claus</h3>
             <span>intern doctor</span>
             <div class="share">
                 
@@ -286,8 +268,8 @@ if(isset($_POST['submit'])){
             </div>
         </div>
         <div class="box">
-            <img src="image/doc-8.jpg" alt="">
-            <h3>win coder</h3>
+            <img src=" dog.jpj.jpg" alt="">
+            <h3>Dante Harper</h3>
             <span>expert doctor</span>
             <div class="share">
             <a href="#" class="fab fa-facebook-f"></a>
@@ -297,8 +279,8 @@ if(isset($_POST['submit'])){
             </div>
         </div>
         <div class="box">
-            <img src="image/doc-9.jpg" alt="">
-            <h3>win coder</h3>
+            <img src=" dog.jpj.jpg" alt="">
+            <h3>Tom Hagen</h3>
             <span>expert doctor</span>
             <div class="share">
             <a href="#" class="fab fa-facebook-f"></a>
@@ -323,17 +305,11 @@ if(isset($_POST['submit'])){
     <div class="row">
 
         <div class="image">
-            <img src="image/appointment-img.svg" alt="">
+            <img src=" dog.jpj.jpg" alt="">
         </div>
 
         <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
-        <?php
-            if(isset($message)) {
-                foreach($message as $message) {
-                echo'<p class ="message">'.$message.'</p>';
-            }
-            }
-        ?>
+       
       
             <h3>make appointment</h3>
             <input type="text"name="name" placeholder="your name" class="box">
@@ -358,7 +334,7 @@ if(isset($_POST['submit'])){
     <div class="box-container">
 
         <div class="box">
-            <img src="image/pic-1.jpg" alt="">
+            <img src=" dog.jpj.jpg" alt="">
             <h3>win coder</h3>
             <div class="stars">
                 <i class="fas fa-star"></i>
@@ -371,7 +347,7 @@ if(isset($_POST['submit'])){
         </div>
 
         <div class="box">
-            <img src="image/pic-1.jpg" alt="">
+            <img src=" dog.jpj.jpg" alt="">
             <h3>win coder</h3>
             <div class="stars">
                 <i class="fas fa-star"></i>
@@ -384,7 +360,7 @@ if(isset($_POST['submit'])){
         </div>
 
         <div class="box">
-            <img src="image/pic-1.jpg" alt="">
+            <img src=" dog.jpj.jpg" alt="">
             <h3>win coder</h3>
             <div class="stars">
                 <i class="fas fa-star"></i>
@@ -412,7 +388,7 @@ if(isset($_POST['submit'])){
 
         <div class="box">
             <div class="image">
-                <img src="image/blog-1.jpg" alt="">
+                <img src=" dog.jpj.jpg" alt="">
             </div>
             <div class="content">
                 <div class="icon">
@@ -427,7 +403,7 @@ if(isset($_POST['submit'])){
 
         <div class="box">
             <div class="image">
-                <img src="image/blog-2.jpg" alt="">
+                <img src=" dog.jpj.jpg" alt="">
             </div>
             <div class="content">
                 <div class="icon">
@@ -442,7 +418,7 @@ if(isset($_POST['submit'])){
 
         <div class="box">
             <div class="image">
-                <img src="image/blog-3.jpg" alt="">
+                <img src=" dog.jpj.jpg" alt="">
             </div>
             <div class="content">
                 <div class="icon">
@@ -456,7 +432,7 @@ if(isset($_POST['submit'])){
         </div>
         <div class="box">
             <div class="image">
-                <img src="image/blog-4.jpg" alt="">
+                <img src=" dog.jpj.jpg" alt="">
             </div>
             <div class="content">
                 <div class="icon">
@@ -470,7 +446,7 @@ if(isset($_POST['submit'])){
         </div>
         <div class="box">
             <div class="image">
-                <img src="image/blog-5.jpg" alt="">
+                <img src=" dog.jpj.jpg" alt="">
             </div>
             <div class="content">
                 <div class="icon">
@@ -484,7 +460,7 @@ if(isset($_POST['submit'])){
         </div>
         <div class="box">
             <div class="image">
-                <img src="image/blog-6.jpg" alt="">
+                <img src=" dog.jpj.jpg" alt="">
             </div>
             <div class="content">
                 <div class="icon">
@@ -561,4 +537,4 @@ if(isset($_POST['submit'])){
 <script src="js/script.js"></script>
 
 </body>
-</html>*/
+</html>
