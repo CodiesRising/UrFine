@@ -1,1 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Set Alarm for next Appointment</title>
+    <link rel="stylesheet"href="style.css">
+  </head>
+  <body>
+    <h1> Set Alarm</h1>
 
+    <form onsubmit="scheduleMeeting(event)">
+      <label for="meetingDate">Meeting Date:</label>
+      <input type="date" id="meetingDate" required><br>
+
+      <label for="meetingTime">Meeting Time:</label>
+      <input type="time" id="meetingTime" required><br>
+
+      <button type="submit">Set Alarm</button>
+    </form>
+
+    <script>
+      function scheduleMeeting(event) {
+        event.preventDefault();
+
+        // Get the meeting date and time from the input fields
+        var meetingDate = document.getElementById("meetingDate").value;
+        var meetingTime = document.getElementById("meetingTime").value;
+
+        // Create a Date object with the selected date and time
+        var meetingDateTime = new Date(meetingDate + "T" + meetingTime);
+
+        // Calculate the time remaining until the meeting
+        var timeRemaining = meetingDateTime.getTime() - new Date().getTime();
+
+        // Set a timeout to display the reminder when the time comes
+        setTimeout(displayReminder, timeRemaining);
+      }
+
+      function displayReminder() {
+        // Display the reminder message
+        alert("Meeting reminder: Your meeting is starting now!");
+      }
+    </script>
+  </body>
+</html>
