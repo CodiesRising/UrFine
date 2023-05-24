@@ -1,3 +1,31 @@
+
+<?php
+
+$conn = mysqli_connect('localhost','root','','details_db') or die('connection failed');
+
+if(isset($_POST['submit'])){
+
+   $name = mysqli_real_escape_string($conn, $_POST['name']);
+   $email = mysqli_real_escape_string($conn, $_POST['email']);
+   $number = $_POST['number'];
+   $date = $_POST['date'];
+
+   $insert = mysqli_query($conn, "INSERT INTO `contact_details`(name, email, number, date) VALUES('$name','$email','$number','$date')") or die('query failed');
+
+   if($insert){
+      $message[] = 'appointment made successfully!';
+   }else{
+      $message[] = 'appointment failed';
+   }
+
+}
+?>
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -307,19 +335,28 @@
         </div>
 
         <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
-        <?php
-            if(isset($message)) {
-                foreach($message as $message) {
-                echo'<p class ="message">'.$message.'</p>';
-            }
-            }
-        ?>
+            <?php
+
+
+
+
+                if(isset($message)) {
+                    foreach($message as $message) {
+                    echo'<p class ="message">'.$message.'</p>';
+                }
+                }
+            ?>
+        
       
             <h3>make appointment</h3>
-            <input type="text"name="name" placeholder="your name" class="box">
-            <input type="number"name="number" placeholder="your number" class="box">
-            <input type="email"name="email" placeholder="your email" class="box">
-            <input type="date"name="date" class="box">
+            <label for="name">Name</label>
+            <input type="text"name="name" placeholder="your name" class="box"id="name">
+            <label for="number">Phonenum</label>
+            <input type="number"name="number" placeholder="your number" class="box"id="number">
+            <label for="email">Email</label>
+            <input type="email"name="email" placeholder="your email" class="box"id="email">
+            <label for="date">date</label>
+            <input type="date"name="date" class="box",id="date">
             <input type="submit" name="submit" value="appointment now" class="btn">
         </form>
 
