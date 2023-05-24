@@ -610,40 +610,114 @@ section:nth-child(even){
 
 /* CSS for meeting-setup.html */
 
-body {
+/*.reminder{
+    display: flex;
+    
+    flex-wrap: wrap;
+    gap:1.5rem;
+    padding-top: 10rem;
+    
+}
+.reminder .box-container{
+   display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap:2rem;
+    padding-top: 10rem;
+} 
+*/
+
+.reminder .heading{
+    padding-top: 10rem;;
+}
+.reminder .row{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap:2rem;
+}
+ 
+.reminder .row .image{
+    flex:1 1 45rem;
+    padding-left: 15rem;;
+}
+
+.reminder .row .image img{
+    width: 75%;    
+        border:solid #552648;
+        border-radius: .5rem;
+    
+}
+
+.reminder .row form{
+    flex:1 1 45rem;
+    background: #e8e6e6;
+    border:var(--border);
+    box-shadow: var(--box-shadow);
+    text-align: center;
+    padding: 2rem;
+    border-radius: .5rem;
+}
+.reminder .row form .message{
+    margin-bottom: 2rem;
+    border-radius: .5rem;
+    padding: 1.5rem 1rem;
+    font-size: 1.7rem;
+    text-align: center;
+
+}
+
+.reminder .row form .deets{
+    font-size: 2.5rem;
+    color: var(--border);
+    line-height: 1.8;
+    text-shadow: var(--text-shadow);
+}
+.reminder .row form h3{
+    color:var(--black);
+    padding-bottom: 1rem;
+    font-size: 3rem;
+}
+
+.reminder.row form .box{
+    width: 100%;
+    margin:.7rem 0;
+    border-radius: .5rem;
+    border:var(--border);
+    font-size: 1.6rem;
+    color: var(--black);
+    text-transform: none;
+    
+    padding:1rem ;
+}
+
+.reminder .row form .btn{
+    padding:1rem 4rem;
+}
+
+/* {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     padding: 20px;
-  }
+  }*/
   
-  h1 {
-    color: #333;
-  }
   
-  form {
-    margin-top: 20px;
-  }
+  
   
   label {
     display: block;
     margin-bottom: 5px;
+    
   }
   
   input[type="date"],
   input[type="time"],
+  input[type="text"],
   button {
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 2px solid #552648;
+    width:50%;
   }
   
-  button {
-    background-color: #4caf50;
-    color: white;
-    cursor: pointer;
-  }
   
-  button:hover {
-    background-color: #45a049;
-  }
