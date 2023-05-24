@@ -1,53 +1,225 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Set Alarm for Next appointment</title>
-    <link rel="stylesheet"href="style.css">
-  </head>
-  <body>
-    <h1> Set Alarm</h1>
 
-    <form onsubmit="scheduleMeeting(event)">
-      <label for="meetingDate"> Date:</label>
-      <input type="date" id="meetingDate" required><br>
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-      <label for="meetingTime">Time:</label>
-      <input type="time" id="meetingTime" required><br>
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="style.css">
 
-      <button type="submit">Set Alarm</button>
-    </form>
+</head>
+<body>
+    
+<!-- header section starts  -->
 
-    <script>
-      function scheduleMeeting(event) {
-        event.preventDefault();
+<header class="header">
 
-        // Get the meeting date and time from the input fields
-        var meetingDate = document.getElementById("meetingDate").value;
-        var meetingTime = document.getElementById("meetingTime").value;
+    <a href="#" class="logo"> <i class="fas fa-heartbeat"></i> <strong color="white">UrFine</strong>medical </a>
 
-        // Create a Date object with the selected date and time
-        var meetingDateTime = new Date(meetingDate + "T" + meetingTime);
+    <nav class="navbar">
+        <a href="index.html">home</a>
+        <a href="#about">about</a>
+        <a href="#services">services</a>
+        <a href="#doctors">doctors</a>
+        <a href="#appointment">appointment</a>
+        <a href="records.html">my records</a>
+        <a href="set_alarm.html">upcoming</a>
+        <a href="#review">review</a>
+        
+    </nav>
 
-        // Calculate the time remaining until the meeting
-        var timeRemaining = meetingDateTime.getTime() - new Date().getTime();
+    <div id="menu-btn" class="fas fa-bars"></div>
 
-        // Set a timeout to display the reminder when the time comes
-        setTimeout(displayReminder, timeRemaining);
-      }
+</header>
 
-      function displayReminder() {
-  // Play an alarm sound
-  var audio = new Audio("alarm_sound.mp3");
-  audio.play();
 
-  // Display the reminder message
-  alert("Meeting reminder: Your meeting is starting now!");
 
-  // Pause the alarm sound
-  audio.pause();
+<!-- header section ends -->
+<section class="reminder" id="reminder">
+    <h1 class="heading">Set<span> alarm</span></h1>
+    <div class="row">
+        <div class="image">
+            <img src="alarmpic.png" alt="">
+        </div>
+        <form onsubmit="scheduleMeeting(event)">
+            <label for="meetingDate" class="deets">Date:</label>
+            <input type="date" id="meetingDate" required class="box"><br>
+
+            <label for="meetingTime" class="deets">Time:</label>
+            <input type="time" id="meetingTime" required class="box"><br>
+
+            <label class="deets">Appointment:</label>
+            <input type="text" id="appointmentDetails" required class="box"><br>
+
+            <input type="submit" value="Set Alarm" class="btn" onclick="displayMessage()">
+            <p class="deets" id="message"></p>
+        </form>
+    </div>
+</section>
+
+<section class="active-alarms" id="activeAlarms">
+    <h2 class="heading">Upcoming <span>Appointments</span></h2>
+    <ul id="alarmsList"></ul>
+</section>
+
+<script>
+   
+
+   let alarms = []; // Array to store alarm details
+
+function scheduleMeeting(event) {
+    event.preventDefault();
+
+    // Get the meeting date, time, and appointment from the input fields
+    var meetingDate = document.getElementById("meetingDate").value;
+    var meetingTime = document.getElementById("meetingTime").value;
+    var appointment = document.getElementById("appointment").value;
+
+    // Create a Date object with the selected date and time
+    var meetingDateTime = new Date(meetingDate + "T" + meetingTime);
+
+    // Calculate the time remaining until the meeting
+    var timeRemaining = meetingDateTime.getTime() - new Date().getTime();
+
+    // Set a timeout to display the reminder when the time comes
+    setTimeout(function () {
+        displayReminder(alarms.length);
+    }, timeRemaining);
+
+    const alarm = {
+        dateTime: meetingDateTime, // Store the meeting date and time
+        canceled: false, // Initialize the canceled flag as false
+        appointment: appointment // Store the appointment details
+    };
+
+    alarms.push(alarm); // Add alarm to the array
+
+    updateActiveAlarms(); // Update the active alarms display
+
+    // Reset the form input fields
+    document.getElementById("meetingDate").value = "";
+    document.getElementById("meetingTime").value = "";
+    document.getElementById("appointment").value = "";
+
+    // Display the success message
+    displayMessage();
 }
 
+function displayReminder(index) {
+    // Play an alarm sound
+    var audio = new Audio("alarm_sound.mp3");
+    audio.play();
 
-    </script>
+    // Display the reminder message
+    alert("Meeting reminder: Your meeting is starting now!");
+
+    // Pause the alarm sound
+    audio.pause();
+
+    alarms[index].canceled = true; // Update the canceled flag
+    updateActiveAlarms(); // Update the active alarms display
+}
+
+function displayCancelMessage(index) {
+    alarms[index].canceled = true; // Update the canceled flag
+    updateActiveAlarms(); // Update the active alarms display
+}
+
+function updateActiveAlarms() {
+    const now = new Date();
+    const alarmsList = document.getElementById('alarmsList');
+    alarmsList.innerHTML = ''; // Clear the existing alarms list
+
+    alarms.forEach(function (alarm, index) {
+        if (!alarm.canceled && now < alarm.dateTime) {
+            // Create a new list item for the active alarm
+            const listItem = document.createElement('li');
+            listItem.textContent = `Alarm: ${alarm.dateTime.toLocaleString()} - Appointment: ${alarm.appointment}`;
+
+            // Create a cancel button for the alarm
+            const cancelButton = document.createElement('button');
+            cancelButton.textContent = 'Cancel';
+            cancelButton.addEventListener('click', function () {
+                displayCancelMessage(index);
+            });
+
+            // Add the cancel button to the list item
+            listItem.appendChild(cancelButton);
+
+            // Add the list item to the alarms list
+            alarmsList.appendChild(listItem);
+        } else if (!alarm.canceled && now >= alarm.dateTime) {
+            displayReminder(index);
+        }
+    });
+}
+
+function displayMessage() {
+    const message = document.getElementById('message');
+    message.textContent = 'Alarm Set Successfully!';
+    setTimeout(function () {
+        message.textContent = '';
+    }, 10000); // 10000 milliseconds = 10 seconds
+}
+
+updateActiveAlarms(); // Start updating the active alarms
+
+</script>
+
+<section class="footer">
+
+    <div class="box-container">
+
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="#home"> <i class="fas fa-chevron-right"></i> home </a>
+            <a href="#about"> <i class="fas fa-chevron-right"></i> about </a>
+            <a href="#services"> <i class="fas fa-chevron-right"></i> services </a>
+            <a href="#doctors"> <i class="fas fa-chevron-right"></i> doctors </a>
+            <a href="#appointment"> <i class="fas fa-chevron-right"></i> appointment </a>
+            <a href="#review"> <i class="fas fa-chevron-right"></i> review </a>
+          
+        </div>
+
+        <div class="box">
+            <h3>our services</h3>
+            <a href="#"> <i class="fas fa-chevron-right"></i> Opthalmology </a>
+            <a href="#"> <i class="fas fa-chevron-right"></i> massage therapy </a>
+            <a href="#"> <i class="fas fa-chevron-right"></i>Gynacology </a>
+            <a href="#"> <i class="fas fa-chevron-right"></i> Cardiology </a>
+            <a href="#"> <i class="fas fa-chevron-right"></i> 24/7 med care </a>
+        </div>
+
+        <div class="box">
+            <h3>appointment info</h3>
+            <a href="#"> <i class="fas fa-phone"></i> +909873456723 </a>
+            <a href="#"> <i class="fas fa-phone"></i> +967898745678 </a>
+            <a href="#"> <i class="fas fa-envelope"></i> pups35@gmail.com </a>
+            <a href="#"> <i class="fas fa-envelope"></i> sliuh@gmail.com </a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> Trivandrum,Kerala </a>
+        </div>
+
+        <div class="box">
+            <h3>follow us</h3>
+            <a href="#"> <i class="fab fa-faceappointment-f"></i> faceappointment </a>
+            <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
+            <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
+            <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
+            <a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>
+            <a href="#"> <i class="fab fa-pinterest"></i> pinterest </a>
+        </div>
+
+    </div>
+
+    <div class="credit"> created by <span>Our Team</span> | all rights reserved </div>
+
+</section>
+
+<!-- footer section ends -->
   </body>
 </html>
