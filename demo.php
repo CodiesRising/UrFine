@@ -78,7 +78,7 @@ if(isset($_POST['submit'])){
     <div class="content">
         <h3>We got you!</h3>
         <p> We believe that the greatest gift you can give your famiily and the world is a healthy you.</p>
-        <a href="#appointment" class="btn"> appointment us <span class="fas fa-chevron-right"></span> </a>
+        <a href="#appointment" class="btn"> Book an Appointment <span class="fas fa-chevron-right"></span> </a>
     </div>
 
 </section>
