@@ -1,33 +1,108 @@
-
-
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1.0">
-	<title>Medical Records</title>
-	<link href="style.css" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Records</title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-	<h1 <input class="b"><strong>Upload you medical records here</strong></h1>
+    
+<!-- header section starts  -->
 
-	<h3>
-		
-	</h3>
+<header class="header">
+
+    <a href="#" class="logo"> <i class="fas fa-heartbeat"></i> <strong color="white">UrFine</strong>medical </a>
+
+    <nav class="navbar">
+        <a href="demo.php">home</a>
+        <a href="#about">about</a>
+        <a href="#services">services</a>
+        <a href="#doctors">doctors</a>
+        <a href="#appointment">appointment</a>
+        <a href="record.html">my records</a>
+        <a href="set_alarm.html">upcoming</a>
+        <a href="#review">review</a>
+        
+    </nav>
+
+    <div id="menu-btn" class="fas fa-bars"></div>
+
+</header>
+<section class="reminder" id="reminder">
+	<h1 class="heading">Upload your <span>Medical Records</span> here</h1>
+</section>
+<section><h1 input class="b"></h1>
 
 	<form action="/action_page.php"
 		enctype="multipart/form-data">
 
-		<label for="myfile"><a>Select a file:</a></label>
+		<label for="myfile"><a>Select a file : </a></label>
 
 		<input type="file" id="myfile"
 			name="myfile" multiple="multiple" />
 		
 		<br /><br />
 	
-		<input type="submit" />
+		<input type="submit" class="btn">
 	</form>
-</body>
+	</section>
+	<section class="footer">
 
-</html>
+		<div class="box-container">
+	
+			<div class="box">
+				<h3>quick links</h3>
+				<a href="demo.php"> <i class="fas fa-chevron-right"></i> home </a>
+				<a href="#about"> <i class="fas fa-chevron-right"></i> about </a>
+				<a href="#services"> <i class="fas fa-chevron-right"></i> services </a>
+				<a href="#doctors"> <i class="fas fa-chevron-right"></i> doctors </a>
+				<a href="#appointment"> <i class="fas fa-chevron-right"></i> appointment </a>
+				<a href="#review"> <i class="fas fa-chevron-right"></i> review </a>
+			  
+			</div>
+	
+			<div class="box">
+				<h3>our services</h3>
+				<a href="#"> <i class="fas fa-chevron-right"></i> Opthalmology </a>
+				<a href="#"> <i class="fas fa-chevron-right"></i> massage therapy </a>
+				<a href="#"> <i class="fas fa-chevron-right"></i>Gynacology </a>
+				<a href="#"> <i class="fas fa-chevron-right"></i> Cardiology </a>
+				<a href="#"> <i class="fas fa-chevron-right"></i> 24/7 med care </a>
+			</div>
+	
+			<div class="box">
+				<h3>appointment info</h3>
+				<a href="#"> <i class="fas fa-phone"></i> +909873456723 </a>
+				<a href="#"> <i class="fas fa-phone"></i> +967898745678 </a>
+				<a href="#"> <i class="fas fa-envelope"></i> pups35@gmail.com </a>
+				<a href="#"> <i class="fas fa-envelope"></i> sliuh@gmail.com </a>
+				<a href="#"> <i class="fas fa-map-marker-alt"></i> Trivandrum,Kerala </a>
+			</div>
+	
+			<div class="box">
+				<h3>follow us</h3>
+				<a href="#"> <i class="fab fa-faceappointment-f"></i> faceappointment </a>
+				<a href="#"> <i class="fab fa-twitter"></i> twitter </a>
+				<a href="#"> <i class="fab fa-instagram"></i> instagram </a>
+				<a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>
+				<a href="#"> <i class="fab fa-pinterest"></i> pinterest </a>
+			</div>
+	
+		</div>
+	
+		<div class="credit"> created by <span>Our Team</span> | all rights reserved </div>
+	
+	</section>
+	
+	<!-- footer section ends -->
+	  </body>
+	</html>
+	
