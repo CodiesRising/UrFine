@@ -27,7 +27,7 @@
         <a href="#services">services</a>
         <a href="#doctors">doctors</a>
         <a href="#appointment">appointment</a>
-        <a href="record.html">my records</a>
+        <a href="records.html">my records</a>
         <a href="set_alarm.html">upcoming</a>
         <a href="#review">review</a>
         
@@ -40,136 +40,246 @@
 
 
 <!-- header section ends -->
-<section class="reminder" id="reminder">
-    <h1 class="heading">Set<span> alarm</span></h1>
-    <div class="row">
-        <div class="image">
-            <img src="alarmpic.png" alt="">
+
+    <section class="reminder" id="reminder">
+        <h1 class="heading">Set<span> alarm</span></h1>
+        <div class="row">
+            <div class="image">
+                <img src="alarmpic.png" alt="">
+            </div>
+            <form onsubmit="scheduleMeeting(event)">
+                <label for="meetingDate" class="deets">Date:</label>
+                <input type="date" id="meetingDate" required class="box"><br>
+
+                <label for="meetingTime" class="deets">Time:</label>
+                <input type="time" id="meetingTime" required class="box"><br>
+
+                <label class="deets">Appointment:</label>
+                <input type="text" id="appointmentDetails" required class="box"><br>
+
+                <input type="submit" value="Set Alarm" class="btn">
+                <p class="deets" id="message"></p>
+            </form>
         </div>
-        <form onsubmit="scheduleMeeting(event)">
-            <label for="meetingDate" class="deets">Date:</label>
-            <input type="date" id="meetingDate" required class="box"><br>
+    </section>
 
-            <label for="meetingTime" class="deets">Time:</label>
-            <input type="time" id="meetingTime" required class="box"><br>
+    <section class="active-alarms" id="activeAlarms">
+        <h2 class="heading">Upcoming <span>Appointments</span></h2>
+        <table id="alarmsTable">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Appointment</th>
+                    <th>Cancel</th>
+                </tr>
+            </thead>
+            <tbody id="alarmsList"></tbody>
+        </table>
+    </section>
 
-            <label class="deets">Appointment:</label>
-            <input type="text" id="appointmentDetails" required class="box"><br>
+    <audio id="alarmSound" src="alarm_sound.mp3"></audio>
 
-            <input type="submit" value="Set Alarm" class="btn" onclick="displayMessage()">
-            <p class="deets" id="message"></p>
-        </form>
-    </div>
-</section>
+    <script>
+        let alarms = []; // Array to store alarm details
 
-<section class="active-alarms" id="activeAlarms">
-    <h2 class="heading">Upcoming <span>Appointments</span></h2>
-    <ul id="alarmsList"></ul>
-</section>
+        function scheduleMeeting(event) {
+            event.preventDefault();
 
-<script>
-   
+            const formInputDate = document.getElementById('meetingDate').value;
+            const formInputTime = document.getElementById('meetingTime').value;
+            const message = document.getElementById('message');
 
-   let alarms = []; // Array to store alarm details
+            if (formInputDate === '' || formInputTime === '') {
+                message.textContent = 'Please enter all the fields.';
+                return;
+            }
 
-function scheduleMeeting(event) {
-    event.preventDefault();
+            const meetingDate = new Date(formInputDate + "T" + formInputTime);
+            const currentTime = new Date();
 
-    // Get the meeting date, time, and appointment from the input fields
-    var meetingDate = document.getElementById("meetingDate").value;
-    var meetingTime = document.getElementById("meetingTime").value;
-    var appointment = document.getElementById("appointment").value;
+            if (meetingDate <= currentTime) {
+                message.textContent = 'Please select a future date and time.';
+                return;
+            }
 
-    // Create a Date object with the selected date and time
-    var meetingDateTime = new Date(meetingDate + "T" + meetingTime);
+            const appointment = document.getElementById('appointmentDetails').value;
 
-    // Calculate the time remaining until the meeting
-    var timeRemaining = meetingDateTime.getTime() - new Date().getTime();
+            const alarm = {
+                dateTime: meetingDate,
+                appointment: appointment,
+                canceled: false
+            };
 
-    // Set a timeout to display the reminder when the time comes
-    setTimeout(function () {
-        displayReminder(alarms.length);
-    }, timeRemaining);
+            alarms.push(alarm);
+            updateActiveAlarms();
 
-    const alarm = {
-        dateTime: meetingDateTime, // Store the meeting date and time
-        canceled: false, // Initialize the canceled flag as false
-        appointment: appointment // Store the appointment details
-    };
+            document.getElementById('meetingDate').value = '';
+            document.getElementById('meetingTime').value = '';
+            document.getElementById('appointmentDetails').value = '';
 
-    alarms.push(alarm); // Add alarm to the array
+            message.textContent = 'Alarm set successfully!';
+            setTimeout(function () {
+                message.textContent = '';
+            }, 10000); // 10000 milliseconds = 10 seconds
+        }
 
-    updateActiveAlarms(); // Update the active alarms display
+        function displayReminder(index) {
+            const audio = document.getElementById('alarmSound');
+            audio.play();
 
-    // Reset the form input fields
-    document.getElementById("meetingDate").value = "";
-    document.getElementById("meetingTime").value = "";
-    document.getElementById("appointment").value = "";
+            const alarm = alarms[index];
 
-    // Display the success message
-    displayMessage();
-}
+            const listItem = document.createElement('tr');
 
-function displayReminder(index) {
-    // Play an alarm sound
-    var audio = new Audio("alarm_sound.mp3");
-    audio.play();
+            const dateCell = document.createElement('td');
+            dateCell.textContent = alarm.dateTime.toLocaleDateString();
+            listItem.appendChild(dateCell);
 
-    // Display the reminder message
-    alert("Meeting reminder: Your meeting is starting now!");
+            const timeCell = document.createElement('td');
+            timeCell.textContent = alarm.dateTime.toLocaleTimeString();
+            listItem.appendChild(timeCell);
 
-    // Pause the alarm sound
-    audio.pause();
+            const appointmentCell = document.createElement('td');
+            appointmentCell.textContent = alarm.appointment;
+            listItem.appendChild(appointmentCell);
 
-    alarms[index].canceled = true; // Update the canceled flag
-    updateActiveAlarms(); // Update the active alarms display
-}
-
-function displayCancelMessage(index) {
-    alarms[index].canceled = true; // Update the canceled flag
-    updateActiveAlarms(); // Update the active alarms display
-}
-
-function updateActiveAlarms() {
-    const now = new Date();
-    const alarmsList = document.getElementById('alarmsList');
-    alarmsList.innerHTML = ''; // Clear the existing alarms list
-
-    alarms.forEach(function (alarm, index) {
-        if (!alarm.canceled && now < alarm.dateTime) {
-            // Create a new list item for the active alarm
-            const listItem = document.createElement('li');
-            listItem.textContent = `Alarm: ${alarm.dateTime.toLocaleString()} - Appointment: ${alarm.appointment}`;
-
-            // Create a cancel button for the alarm
             const cancelButton = document.createElement('button');
             cancelButton.textContent = 'Cancel';
             cancelButton.addEventListener('click', function () {
                 displayCancelMessage(index);
             });
 
-            // Add the cancel button to the list item
-            listItem.appendChild(cancelButton);
+            const cancelCell = document.createElement('td');
+            cancelCell.appendChild(cancelButton);
+            listItem.appendChild(cancelCell);
 
-            // Add the list item to the alarms list
+            const alarmsList = document.getElementById('alarmsList');
             alarmsList.appendChild(listItem);
-        } else if (!alarm.canceled && now >= alarm.dateTime) {
-            displayReminder(index);
+
+            audio.onended = function () {
+                alarms[index].canceled = true;
+                displayAppointmentOverMessage(index);
+            };
         }
-    });
-}
 
-function displayMessage() {
-    const message = document.getElementById('message');
-    message.textContent = 'Alarm Set Successfully!';
-    setTimeout(function () {
-        message.textContent = '';
-    }, 10000); // 10000 milliseconds = 10 seconds
-}
+        function displayCancelMessage(index) {
+            const alarmsList = document.getElementById('alarmsList');
+            const listItem = alarmsList.children[index];
 
-updateActiveAlarms(); // Start updating the active alarms
+            alarms[index].canceled = true;
 
-</script>
+            const cancelCell = listItem.lastChild;
+            cancelCell.innerHTML = '';
+
+            const message = document.createElement('p');
+            message.textContent = 'Alarm Canceled!';
+            const okButton = document.createElement('button');
+            okButton.textContent = 'OK';
+            okButton.addEventListener('click', function () {
+                alarms.splice(index, 1);
+                alarmsList.removeChild(listItem);
+            });
+
+            cancelCell.appendChild(message);
+            cancelCell.appendChild(okButton);
+
+            setTimeout(function () {
+                cancelCell.removeChild(message);
+                cancelCell.removeChild(okButton);
+            }, 10000);
+        }
+
+        function displayAppointmentOverMessage(index) {
+            const alarmsList = document.getElementById('alarmsList');
+            const listItem = alarmsList.children[index];
+
+            const message = document.createElement('p');
+            message.textContent = 'Appointment Over';
+            const okButton = document.createElement('button');
+            okButton.textContent = 'OK';
+            okButton.addEventListener('click', function () {
+                alarms.splice(index, 1);
+                alarmsList.removeChild(listItem);
+            });
+
+            const cancelCell = listItem.lastChild;
+            cancelCell.innerHTML = '';
+            cancelCell.appendChild(message);
+            cancelCell.appendChild(okButton);
+        }
+
+        function updateActiveAlarms() {
+            const now = new Date();
+            const alarmsList = document.getElementById('alarmsList');
+            alarmsList.innerHTML = '';
+
+            for (let i = 0; i < alarms.length; i++) {
+                const alarm = alarms[i];
+
+                if (!alarm.canceled && now < alarm.dateTime) {
+                    const listItem = document.createElement('tr');
+
+                    const dateCell = document.createElement('td');
+                    dateCell.textContent = alarm.dateTime.toLocaleDateString();
+                    listItem.appendChild(dateCell);
+
+                    const timeCell = document.createElement('td');
+                    timeCell.textContent = alarm.dateTime.toLocaleTimeString();
+                    listItem.appendChild(timeCell);
+
+                    const appointmentCell = document.createElement('td');
+                    appointmentCell.textContent = alarm.appointment;
+                    listItem.appendChild(appointmentCell);
+
+                    const cancelButton = document.createElement('button');
+                    cancelButton.textContent = 'Cancel';
+                    cancelButton.addEventListener('click', function () {
+                        displayCancelMessage(i);
+                    });
+
+                    const cancelCell = document.createElement('td');
+                    cancelCell.appendChild(cancelButton);
+                    listItem.appendChild(cancelCell);
+
+                    alarmsList.appendChild(listItem);
+
+                    const timeRemaining = alarm.dateTime.getTime() - now.getTime();
+                    setTimeout(displayReminder, timeRemaining, i);
+                } else if (now >= alarm.dateTime && !alarm.canceled) {
+                    const listItem = document.createElement('tr');
+
+                    const dateCell = document.createElement('td');
+                    dateCell.textContent = alarm.dateTime.toLocaleDateString();
+                    listItem.appendChild(dateCell);
+
+                    const timeCell = document.createElement('td');
+                    timeCell.textContent = alarm.dateTime.toLocaleTimeString();
+                    listItem.appendChild(timeCell);
+
+                    const appointmentCell = document.createElement('td');
+                    appointmentCell.textContent = `${alarm.appointment} - Appointment Over`;
+                    listItem.appendChild(appointmentCell);
+
+                    const okButton = document.createElement('button');
+                    okButton.textContent = 'OK';
+                    okButton.addEventListener('click', function () {
+                        alarms.splice(i, 1);
+                        alarmsList.removeChild(listItem);
+                    });
+
+                    const cancelCell = document.createElement('td');
+                    cancelCell.appendChild(okButton);
+                    listItem.appendChild(cancelCell);
+
+                    alarmsList.appendChild(listItem);
+                }
+            }
+        }
+
+        updateActiveAlarms();
+    </script>
+
 
 <section class="footer">
 
@@ -207,7 +317,6 @@ updateActiveAlarms(); // Start updating the active alarms
         <div class="box">
             <h3>follow us</h3>
             <a href="#"> <i class="fab fa-faceappointment-f"></i> faceappointment </a>
-            <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
             <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
             <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
             <a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>

@@ -743,7 +743,45 @@ a
 	text-decoration:none;
 }
 
+#alarmsTable {
+    width: 100%;
+    /*border-collapse: collapse;*/
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    border: 2px solid #552648;
+  }
+  
+  #alarmsTable th,
+  #alarmsTable td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    font-size: medium;
+    color:#552648
+  }
+  
+  #alarmsTable th {
+    background-color: #f2f2f2;
+  }
+  
+  #alarmsTable button {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: .5rem;
+    padding-left: 1rem;
+    border:var(--border);
+    border-radius: .5rem;
+    box-shadow: var(--box-shadow);
+    color:var(--green);
+    cursor: pointer;
+    font-size: 1.7rem;
+    background: #fff;
+  } 
 
+  #alarmsTable button:hover{
+    background: var(--green);
+    color:#ffffff;
+}
 
 
 
