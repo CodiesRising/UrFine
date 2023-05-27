@@ -55,7 +55,7 @@ if(isset($_POST['submit'])){
         <a href="#services">services</a>
         <a href="#doctors">doctors</a>
         <a href="#appointment">appointment</a>
-        <a href="records.html">my records</a>
+        <a href="record.html">my records</a>
         <a href="set_alarm.html">upcoming</a>
         <a href="#review">review</a>
         
