@@ -719,5 +719,33 @@ section:nth-child(even){
     border: 2px solid #552648;
     width:50%;
   }
+/*records*/
+body
+{
+	
+	margin:0;
+	background-image:url("https://img.freepik.com/free-photo/top-view-professional-stethoscope-with-pills-table_23-2148430024.jpg?w=2000");
+}
+
+
+a
+{
+	font-family: arial,sans-serif;
+	font-size:20px;
+	color:white;
+	text-decoration:none;
+}
+.b
+{
+	font-family: arial,sans-serif;
+	font-size:35px;
+	color:white;
+	text-decoration:none;
+}
+
+
+
+
+
   
   
